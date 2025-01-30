@@ -34,7 +34,7 @@ async def handle_tts(update, context):
     tts.save(file_name)
 
     changed_file = "".join(random.choices(string.ascii_letters + string.digits, k= 6)) + ".mp3"
-    ffmpeg.input(file_name).output(changed_file, af='atempo=1.5').run()
+    ffmpeg.input(file_name).output(changed_file, af='atempo=1.5,asetrate=44100*0.62,aresample=44100,bass=g=24,treble=g=2').run()
     os.remove(file_name)
 
     with open(changed_file, 'rb') as voice_file:
